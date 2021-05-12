@@ -49,6 +49,7 @@ dependencies {
     def roomVersion = '2.3.0'
     def navVersion = '2.3.5'
     def preferencesVersion = '1.1.1'
+    def materialVersion = '1.3.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
@@ -58,6 +59,8 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation "com.google.android.material:material:$materialVersion"
 
     implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionVersion"
 
