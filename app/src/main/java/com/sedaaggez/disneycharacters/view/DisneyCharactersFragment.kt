@@ -30,8 +30,8 @@ class DisneyCharactersFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(DisneyCharactersViewModel::class.java)
         viewModel.getData()
 
-        recyclerViewCharacter.layoutManager = LinearLayoutManager(context)
-        recyclerViewCharacter.adapter = disneyCharacterAdapter
+        recyclerViewCharacters.layoutManager = LinearLayoutManager(context)
+        recyclerViewCharacters.adapter = disneyCharacterAdapter
 
         observeLiveData()
 
@@ -42,7 +42,7 @@ class DisneyCharactersFragment : Fragment() {
 
         viewModel.characters.observe(viewLifecycleOwner, Observer {characterList ->
             characterList?.let {
-                recyclerViewCharacter.visibility = View.VISIBLE
+                recyclerViewCharacters.visibility = View.VISIBLE
                 disneyCharacterAdapter.updateCharacterList(characterList.data!!)
             }
         })
@@ -52,7 +52,7 @@ class DisneyCharactersFragment : Fragment() {
                 if(it) {
                     textViewError.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
-                    recyclerViewCharacter.visibility = View.GONE
+                    recyclerViewCharacters.visibility = View.GONE
                 } else {
                     textViewError.visibility = View.GONE
 
@@ -65,7 +65,7 @@ class DisneyCharactersFragment : Fragment() {
                 if(it) {
                     progressBar.visibility = View.VISIBLE
                     textViewError.visibility = View.GONE
-                    recyclerViewCharacter.visibility = View.GONE
+                    recyclerViewCharacters.visibility = View.GONE
 
                 } else {
                     progressBar.visibility = View.GONE
