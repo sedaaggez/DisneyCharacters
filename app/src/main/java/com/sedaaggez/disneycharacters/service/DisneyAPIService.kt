@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DisneyAPIService {
 
-    private val BASE_URL = "http://api.disneyapi.dev/"
+    private val BASE_URL = "https://api.disneyapi.dev/"
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

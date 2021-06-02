@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.sedaaggez.disneycharacters.R
 import com.sedaaggez.disneycharacters.adapter.DisneyCharacterAdapter
 import com.sedaaggez.disneycharacters.viewmodel.DisneyCharactersViewModel
@@ -18,32 +18,31 @@ class DisneyCharactersFragment : Fragment() {
     private lateinit var viewModel : DisneyCharactersViewModel
     private val disneyCharacterAdapter = DisneyCharacterAdapter(arrayListOf())
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return inflater.inflate(R.layout.fragment_disney_characters, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(DisneyCharactersViewModel::class.java)
-        viewModel.getData()
+        viewModel.getData(1)
 
-        recyclerViewCharacters.layoutManager = LinearLayoutManager(context)
+        recyclerViewCharacters.layoutManager = GridLayoutManager(context, 2)
         recyclerViewCharacters.adapter = disneyCharacterAdapter
 
         observeLiveData()
-
-        return inflater.inflate(R.layout.fragment_disney_characters, container, false)
     }
 
     private fun observeLiveData() {
 
-        viewModel.characters.observe(viewLifecycleOwner, Observer {characterList ->
-            characterList?.let {
+        viewModel.characters.observe(viewLifecycleOwner, Observer {characters ->
+            characters?.let {
                 recyclerViewCharacters.visibility = View.VISIBLE
-                disneyCharacterAdapter.updateCharacterList(characterList.data!!)
+                disneyCharacterAdapter.updateCharacterList(characters)
             }
         })
 
