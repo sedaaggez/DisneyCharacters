@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sedaaggez.disneycharacters.R
 import com.sedaaggez.disneycharacters.model.Character
+import com.sedaaggez.disneycharacters.util.downloadFromUrl
+import com.sedaaggez.disneycharacters.util.placeholderProgressBar
 import kotlinx.android.synthetic.main.item_disney_character.view.*
 
 class DisneyCharacterAdapter(val characterList: ArrayList<Character>): RecyclerView.Adapter<DisneyCharacterAdapter.DisneyCharacterViewHolder>()  {
@@ -22,6 +24,7 @@ class DisneyCharacterAdapter(val characterList: ArrayList<Character>): RecyclerV
 
     override fun onBindViewHolder(holder: DisneyCharacterViewHolder, position: Int) {
         holder.view.textViewCharacter.text = characterList[position].name
+        holder.view.imageViewCharacter.downloadFromUrl(characterList[position].imageUrl, placeholderProgressBar(holder.view.context))
     }
 
     override fun getItemCount(): Int {
