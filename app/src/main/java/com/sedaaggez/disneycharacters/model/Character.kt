@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Character(
-    @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Integer?,
     @ColumnInfo(name = "url")
@@ -33,4 +32,7 @@ data class Character(
     val allies: List<String>?,
     @ColumnInfo(name = "enemies")
     val enemies: List<String>?
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var uuid: Int = 0
+}
