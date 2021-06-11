@@ -17,5 +17,5 @@ interface DisneyDao {
     suspend fun getCharacter(characterId: Int): Character
 
     @Query("DELETE FROM character")
-    suspend fun deleteAllJobs()
+    suspend fun deleteAllCharacters()
 }
