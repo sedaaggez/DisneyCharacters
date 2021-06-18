@@ -22,5 +22,9 @@
         <action
             android:id="@+id/action_disneyCharacterDetailFragment_to_disneyCharactersFragment"
             app:destination="@id/disneyCharactersFragment" />
+        <argument
+            android:name="characterUuid"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

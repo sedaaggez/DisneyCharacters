@@ -13,7 +13,7 @@ interface DisneyDao {
     @Query("SELECT * FROM character")
     suspend fun getAllCharacters(): List<Character>
 
-    @Query("SELECT * FROM character WHERE id = :characterId")
+    @Query("SELECT * FROM character WHERE uuid = :characterId")
     suspend fun getCharacter(characterId: Int): Character
 
     @Query("DELETE FROM character")

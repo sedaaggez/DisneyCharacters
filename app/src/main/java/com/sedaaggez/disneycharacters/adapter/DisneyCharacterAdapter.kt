@@ -3,14 +3,17 @@ package com.sedaaggez.disneycharacters.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.sedaaggez.disneycharacters.R
 import com.sedaaggez.disneycharacters.model.Character
 import com.sedaaggez.disneycharacters.util.downloadFromUrl
 import com.sedaaggez.disneycharacters.util.placeholderProgressBar
+import com.sedaaggez.disneycharacters.view.DisneyCharactersFragmentDirections
 import kotlinx.android.synthetic.main.item_disney_character.view.*
 
-class DisneyCharacterAdapter(val characterList: ArrayList<Character>): RecyclerView.Adapter<DisneyCharacterAdapter.DisneyCharacterViewHolder>()  {
+class DisneyCharacterAdapter(val characterList: ArrayList<Character>) :
+    RecyclerView.Adapter<DisneyCharacterAdapter.DisneyCharacterViewHolder>() {
 
     class DisneyCharacterViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
@@ -24,7 +27,17 @@ class DisneyCharacterAdapter(val characterList: ArrayList<Character>): RecyclerV
 
     override fun onBindViewHolder(holder: DisneyCharacterViewHolder, position: Int) {
         holder.view.textViewCharacter.text = characterList[position].name
-        holder.view.imageViewCharacter.downloadFromUrl(characterList[position].imageUrl, placeholderProgressBar(holder.view.context))
+        holder.view.imageViewCharacter.downloadFromUrl(
+            characterList[position].imageUrl,
+            placeholderProgressBar(holder.view.context)
+        )
+        holder.view.setOnClickListener {
+            val action =
+                DisneyCharactersFragmentDirections.actionDisneyCharactersFragmentToDisneyCharacterDetailFragment(
+                    characterList[position].uuid
+                )
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
