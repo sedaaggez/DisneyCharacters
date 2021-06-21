@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <data>
+        <variable
+            name="character"
+            type="com.sedaaggez.disneycharacters.model.Character"></variable>
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +27,7 @@
                 android:layout_width="200dp"
                 android:layout_height="300dp"
                 android:scaleType="fitXY"
+                android:downloadUrl="@{character.imageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +41,7 @@
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold"
+                android:text="@{character.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
