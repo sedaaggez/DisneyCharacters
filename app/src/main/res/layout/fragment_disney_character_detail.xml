@@ -39,23 +39,23 @@
 
         <TextView
             android:id="@+id/textViewShows"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
             android:text="TV Shows"
-            android:visibility="gone"
             android:textColor="@android:color/holo_orange_dark"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDetailCharacterName" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewTvShows"
-            android:layout_width="357dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="11dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
