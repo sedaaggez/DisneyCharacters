@@ -29,7 +29,7 @@ class DisneyCharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(DisneyCharactersViewModel::class.java)
-        viewModel.getData(2)
+        viewModel.getData(1)
 
         recyclerViewCharacters.layoutManager = GridLayoutManager(context, 2)
         recyclerViewCharacters.adapter = disneyCharacterAdapter

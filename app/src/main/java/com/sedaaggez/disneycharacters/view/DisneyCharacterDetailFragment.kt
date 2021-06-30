@@ -8,15 +8,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sedaaggez.disneycharacters.R
+import com.sedaaggez.disneycharacters.adapter.DisneyTvShowAdapter
 import com.sedaaggez.disneycharacters.databinding.FragmentDisneyCharacterDetailBinding
 import com.sedaaggez.disneycharacters.viewmodel.DisneyCharacterDetailViewModel
+import kotlinx.android.synthetic.main.fragment_disney_character_detail.*
 
 class DisneyCharacterDetailFragment : Fragment() {
 
-    private lateinit var viewModel : DisneyCharacterDetailViewModel
+    private lateinit var viewModel: DisneyCharacterDetailViewModel
     private var characterUuid = 0
     private lateinit var dataBinding: FragmentDisneyCharacterDetailBinding
+    private val disneyTvShowAdapter = DisneyTvShowAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,9 @@ class DisneyCharacterDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(DisneyCharacterDetailViewModel::class.java)
+
+        recyclerViewTvShows.layoutManager = LinearLayoutManager(context)
+        recyclerViewTvShows.adapter = disneyTvShowAdapter
 
         arguments?.let {
             characterUuid = DisneyCharacterDetailFragmentArgs.fromBundle(it).characterUuid
