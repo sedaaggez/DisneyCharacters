@@ -40,17 +40,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewDetailCharacter" />
 
+
             <TextView
-                android:id="@+id/textViewShows"
-                android:layout_width="match_parent"
+                android:id="@+id/textViewTvShows"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:text="TV Shows"
+                android:layout_marginTop="25dp"
+                android:text="Tv Shows"
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="30sp"
-                android:textStyle="bold"
                 android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDetailCharacterName" />
 
@@ -63,7 +63,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewShows" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewTvShows" />
 
             <TextView
                 android:id="@+id/textViewVideoGame"
@@ -90,13 +90,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewVideoGame" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
-
-
-
-
-
 </layout>
