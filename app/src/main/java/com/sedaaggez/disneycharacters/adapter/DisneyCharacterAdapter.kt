@@ -35,7 +35,6 @@ class DisneyCharacterAdapter(val characterList: ArrayList<Character>) :
     }
 
     fun updateCharacterList(newCharacterList: List<Character>) {
-        characterList.clear()
         characterList.addAll(newCharacterList)
         notifyDataSetChanged()
     }

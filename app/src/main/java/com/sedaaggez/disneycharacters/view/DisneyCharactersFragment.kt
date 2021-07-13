@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.sedaaggez.disneycharacters.R
 import com.sedaaggez.disneycharacters.adapter.DisneyCharacterAdapter
 import com.sedaaggez.disneycharacters.viewmodel.DisneyCharactersViewModel
@@ -17,6 +19,10 @@ class DisneyCharactersFragment : Fragment() {
 
     private lateinit var viewModel : DisneyCharactersViewModel
     private val disneyCharacterAdapter = DisneyCharacterAdapter(arrayListOf())
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private var page = 1
+    private var count = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,12 +35,31 @@ class DisneyCharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(DisneyCharactersViewModel::class.java)
-        viewModel.getData(1)
+        viewModel.getData(page)
 
         recyclerViewCharacters.layoutManager = GridLayoutManager(context, 2)
         recyclerViewCharacters.adapter = disneyCharacterAdapter
 
+        linearLayoutManager = recyclerViewCharacters.layoutManager as LinearLayoutManager
+
         observeLiveData()
+
+        recyclerViewCharacters.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) {
+                    var findLastCompletelyVisibleItemPosition =
+                        linearLayoutManager.findLastCompletelyVisibleItemPosition()
+                    var itemCount = linearLayoutManager.itemCount
+                    if (count == 50 && findLastCompletelyVisibleItemPosition == itemCount - 1) {
+                        page++
+                        viewModel.getData(page)
+                    }
+                }
+
+                super.onScrolled(recyclerView, dx, dy)
+
+            }
+        })
     }
 
     private fun observeLiveData() {
@@ -43,6 +68,12 @@ class DisneyCharactersFragment : Fragment() {
             characters?.let {
                 recyclerViewCharacters.visibility = View.VISIBLE
                 disneyCharacterAdapter.updateCharacterList(characters)
+            }
+        })
+
+        viewModel.count.observe(viewLifecycleOwner, Observer { countLiveData ->
+            countLiveData.let {
+                count = countLiveData
             }
         })
 
