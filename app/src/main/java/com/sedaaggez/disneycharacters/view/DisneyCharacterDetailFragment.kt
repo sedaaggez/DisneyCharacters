@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sedaaggez.disneycharacters.R
 import com.sedaaggez.disneycharacters.adapter.DisneyTvShowAdapter
+import com.sedaaggez.disneycharacters.adapter.DisneyVideoGameAdapter
 import com.sedaaggez.disneycharacters.databinding.FragmentDisneyCharacterDetailBinding
 import com.sedaaggez.disneycharacters.viewmodel.DisneyCharacterDetailViewModel
 import kotlinx.android.synthetic.main.fragment_disney_character_detail.*
@@ -21,6 +22,7 @@ class DisneyCharacterDetailFragment : Fragment() {
     private var characterUuid = 0
     private lateinit var dataBinding: FragmentDisneyCharacterDetailBinding
     private val disneyTvShowAdapter = DisneyTvShowAdapter(arrayListOf())
+    private val disneyVideoGameAdapter = DisneyVideoGameAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +44,9 @@ class DisneyCharacterDetailFragment : Fragment() {
         recyclerViewTvShows.layoutManager = LinearLayoutManager(context)
         recyclerViewTvShows.adapter = disneyTvShowAdapter
 
+        recyclerViewVideoGames.layoutManager = LinearLayoutManager(context)
+        recyclerViewVideoGames.adapter = disneyVideoGameAdapter
+
         arguments?.let {
             characterUuid = DisneyCharacterDetailFragmentArgs.fromBundle(it).characterUuid
         }
@@ -55,6 +60,9 @@ class DisneyCharacterDetailFragment : Fragment() {
         viewModel.characterLiveData.observe(viewLifecycleOwner, Observer { character ->
             character?.let {
                 dataBinding.character = character
+                if (character.videoGames!![0] != "") {
+                    disneyVideoGameAdapter.updateVideoGameList(character.videoGames!!)
+                }
                 if (character.tvShows!![0] != "") {
                     disneyTvShowAdapter.updateTvShowList(character.tvShows!!)
                     textViewTvShows.visibility = View.VISIBLE
