@@ -12,11 +12,12 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 
-class DisneyCharactersViewModel(application: Application) : BaseViewModel(application){
+class DisneyCharactersViewModel(application: Application) : BaseViewModel(application) {
 
     val characters = MutableLiveData<List<Character>>()
     val characterError = MutableLiveData<Boolean>()
-    val  characterLoading = MutableLiveData<Boolean>()
+    val characterLoading = MutableLiveData<Boolean>()
+    val count = MutableLiveData<Int>()
 
     private val disneyAPIService = DisneyAPIService()
     private val disposable = CompositeDisposable()
@@ -30,6 +31,7 @@ class DisneyCharactersViewModel(application: Application) : BaseViewModel(applic
                 .subscribeWith(object : DisposableSingleObserver<CharacterList>() {
                     override fun onSuccess(t: CharacterList) {
                         storeInSQLite(t.data!!)
+                        count.value = t.count
                     }
 
                     override fun onError(e: Throwable) {
